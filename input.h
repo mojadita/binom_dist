@@ -8,15 +8,15 @@
 #define _INPUT_H
 
 unsigned get_unsigned(
-		const char *str,  /* string to parse */
-		unsigned    dflt, /* default value assumed in error */
-		const char *fmt,  /* error message format */
-		...);             /* ... and arguments */
+        const char *str,  /* string to parse */
+        unsigned    dflt, /* default value assumed in error */
+        const char *fmt,  /* error message format */
+        ...);             /* ... and arguments */
 
 double get_double(
-		const char *str,  /* string to parse */
-		double      dflt, /* default value assumed in error */
-		const char *fmt,  /* error message format */
-		...);             /* ... and arguments */
+        const char *str,  /* string to parse */
+        double      dflt, /* default value assumed in error */
+        const char *fmt,  /* error message format */
+        ...);             /* ... and arguments */
 
 #endif /* _INPUT_H */
