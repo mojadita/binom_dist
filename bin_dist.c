@@ -118,8 +118,14 @@ main(int argc, char **argv)
     seed48(seed);
 
     /* allocate probabilities */
-    double   *prob_table = calloc(n,     sizeof *prob_table);
-    unsigned *histogram  = calloc(n + 1, sizeof *histogram);
+    double   prob_table[n];
+    unsigned histogram[n+1];
+
+	for (int i = 0; i < n; i++) {
+		prob_table[i] = 0.0;
+		histogram[i] = 0;
+	}
+	histogram[n] = 0;
 
     double accum_prob = 0.0;
 
@@ -188,8 +194,6 @@ main(int argc, char **argv)
         }
     } /* for */
 
-	free(prob_table);
-
     /* print the histogram */
     if (flags & FLAG_SHOW_HISTOGRAM) {
         for (int i = 0; i <= n; ++i) {
@@ -206,7 +210,5 @@ main(int argc, char **argv)
             }
         }
     }
-
-	free(histogram);
 
 } /* main */
