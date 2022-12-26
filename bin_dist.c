@@ -34,14 +34,13 @@ unsigned N = DEF_N,
          n = DEF_n;
 double   p = DEF_p;
 
-double *prob_table = NULL;
-
 int
 main(int argc, char **argv)
 {
     int opt;
-    int flags = 0;
+    int flags            = 0;
     unsigned num_columns = DEF_COLS;
+
     while ((opt = getopt(argc, argv, "abc:dhmN:n:op:")) != EOF) {
         switch (opt) {
 
@@ -97,6 +96,7 @@ main(int argc, char **argv)
     /* initialize random number generator */
     unsigned short seed[3];
     static const char *const dev = "/dev/urandom";
+
     int fd = open(dev, O_RDONLY);
     if (fd < 0) {
         ERR(EXIT_FAILURE,
@@ -118,8 +118,8 @@ main(int argc, char **argv)
     seed48(seed);
 
     /* allocate probabilities */
-    prob_table = calloc(n + 1, sizeof *prob_table);
-    unsigned *histogram = calloc(n + 1, sizeof *histogram);
+    double   *prob_table = calloc(n,     sizeof *prob_table);
+    unsigned *histogram  = calloc(n + 1, sizeof *histogram);
 
     double accum_prob = 0.0;
 
@@ -188,6 +188,8 @@ main(int argc, char **argv)
         }
     } /* for */
 
+	free(prob_table);
+
     /* print the histogram */
     if (flags & FLAG_SHOW_HISTOGRAM) {
         for (int i = 0; i <= n; ++i) {
@@ -204,5 +206,7 @@ main(int argc, char **argv)
             }
         }
     }
+
+	free(histogram);
 
 } /* main */
